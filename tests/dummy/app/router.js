@@ -9,4 +9,5 @@ export default class Router extends EmberRouter {
 Router.map(function() {
   this.route('contextual-service-in-route');
   this.route('without-contextual-service');
+  this.route('data-loading');
 });

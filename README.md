@@ -15,6 +15,10 @@ ember install ember-contextual-services--alpha
 
 # Usage
 
+All ContextualServices are classes that can hold any state or perform any action. They could represent specific interfaces to APIs, or a way of accessing data loaded from ember-data from deep within the route's component tree.
+
+NOTE: all of these examples are available for viewing in the `tests/dummy` folder.
+
 in routes/wherever/-contexts/local-service.js;
 ```ts
 import { ContextualService } from 'ember-contextual-services';
@@ -46,6 +50,21 @@ export default class SomeRoute extends Route {
 
 }
 ```
+or if you want to utilize the route's model hook for data-loading, you could do:
+```ts
+@withContextualServices(PersonService)
+export default class SomeRoute extends Route {
+  @context(PersonService) personService;
+
+  async model() {
+    let response = await fetch('https://swapi.co/api/people/1/');
+    let json = await response.json();
+
+    this.personService.data = json;
+  }
+}
+```
+
 
 and finally, in a component that is rendered by your route's template or a tree of components fromy our route's template,
 
