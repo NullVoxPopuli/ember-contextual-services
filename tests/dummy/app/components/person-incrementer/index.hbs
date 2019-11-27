@@ -1,0 +1,11 @@
+<fieldset>
+  <legend>Person Incrementer</legend>
+
+  <button {{on 'click' this.personService.nextPerson}}>
+    Increment Foo
+  </button>
+  <br>
+
+  {{stringify this.personService.data}}
+
+</fieldset>
