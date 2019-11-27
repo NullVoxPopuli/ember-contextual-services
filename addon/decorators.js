@@ -1,4 +1,5 @@
 import { getOwner } from '@ember/application';
+import { assert } from '@ember/debug';
 
 import { registryFor } from './utils';
 
@@ -6,7 +7,7 @@ const REGISTRY = Symbol('ContextualRegistry');
 
 const REGISTRY_NAME = 'service:ember-contextual-services/-private/registry';
 
-export function provideContexts(...services) {
+export function withContextualServices(...services) {
   return function contextInjector(ProvideeClass) {
     return class WithContexts extends ProvideeClass {
       static name = `${ProvideeClass.name}WithProvidedContexts`;
@@ -44,25 +45,35 @@ export function provideContexts(...services) {
 }
 
 export function context(ContextKey) {
-  return function contextDecorator(target, propertyName, descriptor) {
-      descriptor.writable = false;
-      descriptor.configurable = true;
-      descriptor.enumerable = true;
-      descriptor.get = function() {
-        console.log('getting?');
-        let owner = getOwner(this);
-        let registry = owner.lookup(REGISTRY_NAME);
-        let router = owner.lookup('router:main');
-        let localRegistry = registryFor(registry, router.currentRouteName);
+  // https://github.com/emberjs/ember.js/blob/755ea5dbe65d91e0d650707da740aa6900d0a755/packages/%40ember/-internals/metal/lib/injected_property.ts#L72
+   let getInjection = function() {
+    let owner = getOwner(this);
 
-        console.log(owner, router, localRegistry);
+    assert(
+      `Attempting to lookup an injected property on an object without a container, ensure that the object was instantiated via a container.`,
+      Boolean(owner)
+    );
 
-        let context = localRegistry.get(ContextKey);
+    let registry = owner.lookup(REGISTRY_NAME);
 
-        return context;
+    let router = owner.lookup('router:main');
+    let localRegistry = registryFor(registry, router.currentRouteName);
 
-    }
+   assert(
+     `Attempt to look up contextual service failed. Ensure that your route is decorated with @withContextualServices(${ContextKey.name})`,
+     Boolean(localRegistry)
+   );
 
-    return descriptor;
+    let context = localRegistry.get(ContextKey);
+
+     return context;
+  };
+
+  return (target, propertyName, descriptor) => {
+    return {
+      configurable: false,
+      enumerable: true,
+      get: getInjection,
+    };
   }
 }
