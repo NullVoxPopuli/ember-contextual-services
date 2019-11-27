@@ -10,7 +10,7 @@ Supports
 # Installation
 
 ```
-ember install ember-contextual-services
+ember install ember-contextual-services--alpha
 ```
 
 # Usage
