@@ -1,1 +1,12 @@
-{{yield}}
+{{log this.localService}}
+<fieldset>
+  <legend>
+    Foo Incrementer from LocalService @ {{this.localService.router.currentRouteName}}
+  </legend>
+
+  {{this.localService.foo}}
+
+  <button {{on 'click' this.localService.incrementFoo}}>
+    Increment Foo
+  </button>
+</fieldset>

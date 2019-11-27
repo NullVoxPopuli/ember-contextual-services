@@ -43,4 +43,26 @@ export function provideContexts(...services) {
   }
 }
 
+export function context(ContextKey) {
+  return function contextDecorator(target, propertyName, descriptor) {
+      descriptor.writable = false;
+      descriptor.configurable = true;
+      descriptor.enumerable = true;
+      descriptor.get = function() {
+        console.log('getting?');
+        let owner = getOwner(this);
+        let registry = owner.lookup(REGISTRY_NAME);
+        let router = owner.lookup('router:main');
+        let localRegistry = registryFor(registry, router.currentRouteName);
 
+        console.log(owner, router, localRegistry);
+
+        let context = localRegistry.get(ContextKey);
+
+        return context;
+
+    }
+
+    return descriptor;
+  }
+}

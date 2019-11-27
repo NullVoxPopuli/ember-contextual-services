@@ -1,6 +1,12 @@
-import Component from '@ember/component';
-import layout from '../../templates/components/contextual-service-in-route/service-consumer';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  layout
-});
+import { context } from 'ember-contextual-services';
+
+import { LocalService } from 'dummy/routes/-contexts/local-service';
+
+export default class ServiceConsumer extends Component {
+  @context(LocalService) localService;
+
+
+}
+
