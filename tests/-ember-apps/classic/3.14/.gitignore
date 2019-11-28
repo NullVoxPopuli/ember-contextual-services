@@ -1,13 +1,12 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-dist/
-tmp/
+/dist/
+/tmp/
 
 # dependencies
 /bower_components/
-node_modules/
-/tests/**/yarn.lock
+/node_modules/
 
 # misc
 /.env*
