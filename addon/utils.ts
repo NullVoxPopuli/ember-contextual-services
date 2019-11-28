@@ -37,7 +37,7 @@ export function getContextInNearestRegistry(this: unknown, ContextKey: Class) {
   }
 
   assert(
-    `Attempt to retrieve a contextual service named ${ContextKey.name}. It was not found in the local registry`,
+    `Attempt to retrieve a contextual service named ${ContextKey.name}. It was not found in the local registry on the ${router.currentRouteName} route or any ancestor routes.`,
     Boolean(context)
   );
 
