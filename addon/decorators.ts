@@ -13,7 +13,7 @@ export function withContextualServices(...services: Class[]) {
       // @ts-ignore
       static name = `${ProvideeClass.name}WithContextualServices`;
 
-      activate() {
+      model(...args: any[]) {
         let owner = getOwner(this);
         let registry = owner.lookup(REGISTRY_NAME);
         let localRegistry = registryFor(registry, this.routeName);
@@ -28,7 +28,7 @@ export function withContextualServices(...services: Class[]) {
           this[REGISTRY].set(providedService, instance);
         }
 
-        super.activate();
+        super.model(...args);
       }
 
       deactivate() {
