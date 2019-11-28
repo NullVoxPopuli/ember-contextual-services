@@ -4,7 +4,7 @@ Eliminate Prop-Drilling by Providing Ephemeral Services based on the route!
 
 
 Supports
-* Ember.js v3.10 or above
+* Ember.js v3.4 or above
 
 
 # Installation
