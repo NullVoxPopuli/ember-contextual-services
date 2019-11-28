@@ -1,0 +1,41 @@
+name: Tests
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Install
+      run: yarn install
+
+    - name: Test
+      run: yarn test
+
+  tests_integration:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        ember_app:
+          - "classic/3.4"
+          - "classic/3.14"
+          - "octane/3.14"
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Test
+      env:
+        EMBER_APP: ${{ matrix.ember_app }}
+      run: yarn test:integration
