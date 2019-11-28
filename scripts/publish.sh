@@ -11,7 +11,7 @@ cat package.json | jq '.name = "ember-contextual-services--alpha"' | jq . > pack
 mv package.json package.backup.json
 mv package.tmp.json package.json
 
-# yarn publish
+yarn publish
 
 mv package.backup.json package.json
 
