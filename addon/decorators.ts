@@ -1,11 +1,9 @@
 import { getOwner } from '@ember/application';
-import { assert } from '@ember/debug';
 
-import { registryFor } from './utils';
+import { registryFor, getContextInNearestRegistry } from './utils';
+import { REGISTRY_NAME } from './constants';
 
 const REGISTRY = Symbol('ContextualRegistry');
-
-const REGISTRY_NAME = 'service:ember-contextual-services/-private/registry';
 
 export function withContextualServices(...services: Class[]) {
   return function contextInjector(ProvideeClass: Class) {
@@ -47,35 +45,17 @@ export function withContextualServices(...services: Class[]) {
 }
 
 export function context(ContextKey: Class) {
-  // https://github.com/emberjs/ember.js/blob/755ea5dbe65d91e0d650707da740aa6900d0a755/packages/%40ember/-internals/metal/lib/injected_property.ts#L72
-  let getInjection = function(this: unknown) {
-    let owner = getOwner(this);
-
-    assert(
-      `Attempting to lookup an injected property on an object without a container, ensure that the object was instantiated via a container.`,
-      Boolean(owner)
-    );
-
-    let registry = owner.lookup(REGISTRY_NAME);
-
-    let router = owner.lookup('router:main');
-    let localRegistry = registryFor(registry, router.currentRouteName);
-
-    assert(
-      `Attempt to look up contextual service failed. Ensure that your route is decorated with @withContextualServices(${ContextKey.name})`,
-      Boolean(localRegistry)
-    );
-
-    let context = localRegistry.get(ContextKey);
-
-    return context;
-  };
-
   return (_target: unknown, _propertyName: string, _descriptor: PropertyDescriptor) => {
     return {
       configurable: false,
       enumerable: true,
-      get: getInjection,
+      get: function() {
+        try {
+        return getContextInNearestRegistry.call(this, ContextKey);
+        } catch (e) {
+          console.error(e);
+        }
+      },
     };
   };
 }
