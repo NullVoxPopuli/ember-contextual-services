@@ -2,9 +2,16 @@
 
 Eliminate Prop-Drilling by Providing Ephemeral Services based on the route!
 
+_Supports Ember.js v3.4 or above_
 
-Supports
-* Ember.js v3.4 or above
+--------------------------------------------------
+
+Q: How is this different from Ember's Services?
+
+A: Mostly just three differences:
+ - it's private to the route
+ - it's destroyed when you navigate away to a different route
+ - primarily intended for passing the route's model data down to components without using component invocation args, which has the benefit of improving maintainability of templates, should the model's contents are structure change, because only the components in the subtree of the route that access the model data are affected. The components in between would not need to be updated as well, as they do with the default / built in patterns.
 
 
 # Installation
