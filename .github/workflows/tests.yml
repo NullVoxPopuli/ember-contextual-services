@@ -35,8 +35,9 @@ jobs:
   tests_lts_releases:
     name: Tests (LTS & Releases)
     runs-on: ubuntu-latest
-    matrix:
-      scenario:
+    strategy:
+      matrix:
+        scenario:
         - "ember-lts-3.4"
         - "ember-lts-3.8"
         - "ember-lts-3.12"
@@ -59,9 +60,9 @@ jobs:
     strategy:
       matrix:
         ember_app:
-          - "classic/3.4"
-          - "classic/3.14"
-          - "octane/3.14"
+        - "classic/3.4"
+        - "classic/3.14"
+        - "octane/3.14"
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
