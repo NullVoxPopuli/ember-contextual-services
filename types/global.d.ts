@@ -5,5 +5,4 @@ declare module 'ember-contextual-services--alpha/templates/*' {
   export default tmpl;
 }
 
-
-type Class = { new(...args: any[]): any };
+type Class = { new (...args: any[]): any };

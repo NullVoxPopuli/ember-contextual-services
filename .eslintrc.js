@@ -28,6 +28,13 @@ module.exports = {
     'prettier/prettier': 'error',
   },
   overrides: [
+    // tricky files
+    {
+      files: ['addon/decorators.ts'],
+      rules: {
+        '@typescript-eslint/ban-ts-ignore': 'off',
+      },
+    },
     // node files
     {
       files: [

@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 
-
 type LocalRegistry = {
   [routeName: string]: WeakMap<Class, Class>;
 };
