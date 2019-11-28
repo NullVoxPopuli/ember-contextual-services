@@ -38,4 +38,7 @@ jobs:
     - name: Test
       env:
         EMBER_APP: ${{ matrix.ember_app }}
-      run: yarn test:integration
+      run: |
+        cd tests/-ember-apps/$EMBER_APP/
+        yarn
+        yarn test
