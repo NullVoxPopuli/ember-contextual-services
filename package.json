@@ -1,5 +1,5 @@
 {
-  "name": "ember-contextual-services--alpha",
+  "name": "ember-contextual-services",
   "version": "0.0.4",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [

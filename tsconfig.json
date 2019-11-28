@@ -28,16 +28,16 @@
         "tests/dummy/app/*",
         "app/*"
       ],
-      "ember-contextual-services--alpha": [
+      "ember-contextual-services": [
         "addon"
       ],
-      "ember-contextual-services--alpha/*": [
+      "ember-contextual-services/*": [
         "addon/*"
       ],
-      "ember-contextual-services--alpha/test-support": [
+      "ember-contextual-services/test-support": [
         "addon-test-support"
       ],
-      "ember-contextual-services--alpha/test-support/*": [
+      "ember-contextual-services/test-support/*": [
         "addon-test-support/*"
       ],
       "*": [

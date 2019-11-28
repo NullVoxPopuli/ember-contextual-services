@@ -7,46 +7,48 @@ const REGISTRY = Symbol('ContextualRegistry');
 
 const REGISTRY_NAME = 'service:ember-contextual-services/-private/registry';
 
-export function withContextualServices(...services) {
-  return function contextInjector(ProvideeClass) {
+export function withContextualServices(...services: Class[]) {
+  return function contextInjector(ProvideeClass: Class) {
     return class WithContexts extends ProvideeClass {
-      static name = `${ProvideeClass.name}WithProvidedContexts`;
+      // @ts-ignore
+      static name = `${ProvideeClass.name}WithContextualServices`;
 
-      model(...args) {
-        let transition = args[1];
-        let routeName = transition.to.name;
-
+      activate() {
         let owner = getOwner(this);
         let registry = owner.lookup(REGISTRY_NAME);
-        let localRegistry = registryFor(registry, routeName);
+        let localRegistry = registryFor(registry, this.routeName);
 
+        // @ts-ignore
         this[REGISTRY] = localRegistry;
 
         for (let providedService of services) {
           let instance = new providedService(owner.ownerInjection());
 
+          // @ts-ignore
           this[REGISTRY].set(providedService, instance);
         }
 
-        super.model(...args);
+        super.activate();
       }
 
-      willDestroy(...args) {
+      deactivate() {
+        // @ts-ignore
         if (this[REGISTRY]) {
           for (let providedService of services) {
+            // @ts-ignore
             this[REGISTRY].delete(providedService);
           }
         }
 
-        super.willDestroy(...args);
+        super.deactivate();
       }
     };
   };
 }
 
-export function context(ContextKey) {
+export function context(ContextKey: Class) {
   // https://github.com/emberjs/ember.js/blob/755ea5dbe65d91e0d650707da740aa6900d0a755/packages/%40ember/-internals/metal/lib/injected_property.ts#L72
-  let getInjection = function() {
+  let getInjection = function(this: unknown) {
     let owner = getOwner(this);
 
     assert(
@@ -69,7 +71,7 @@ export function context(ContextKey) {
     return context;
   };
 
-  return (_target, _propertyName, _descriptor) => {
+  return (_target: unknown, _propertyName: string, _descriptor: PropertyDescriptor) => {
     return {
       configurable: false,
       enumerable: true,
