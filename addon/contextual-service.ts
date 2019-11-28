@@ -2,11 +2,11 @@
 // This is provided as a convience class for creating injectable
 // contextual services
 export class ContextualService {
-  static create(injections) {
+  static create(injections: any) {
     return new this(injections);
   }
 
-  constructor(injections) {
+  constructor(injections: any) {
     Object.assign(this, injections);
   }
 }

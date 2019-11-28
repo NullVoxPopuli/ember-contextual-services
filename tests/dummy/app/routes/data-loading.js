@@ -8,6 +8,7 @@ export default class DataLoadingRoute extends Route {
   @context(PersonService) personService;
 
   async model() {
+    // await this.personService.nextPerson();
     let response = await fetch('https://swapi.co/api/people/1/');
     let json = await response.json();
 

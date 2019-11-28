@@ -6,6 +6,10 @@
   </button>
   <br>
 
-  {{stringify this.personService.data}}
+  {{#if this.personService.data}}
+    {{stringify this.personService.data}}
+  {{else}}
+    Loading...
+  {{/if}}
 
 </fieldset>

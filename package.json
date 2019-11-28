@@ -1,6 +1,6 @@
 {
-  "name": "ember-contextual-services--alpha",
-  "version": "0.0.4",
+  "name": "ember-contextual-services",
+  "version": "0.0.5",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
@@ -15,12 +15,13 @@
   "scripts": {
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
-    "lint:js": "eslint .",
+    "lint:js": "eslint . --ext ts,js",
     "start": "ember serve",
     "test": "ember test",
+    "test:try-one": "ember try:one",
     "test:all": "ember try:each",
-    "prepublishOnly": "ember ts:precompile",
-    "postpublish": "ember ts:clean"
+    "_prepublishOnly": "ember ts:precompile",
+    "_postpublish": "ember ts:clean"
   },
   "dependencies": {
     "@glimmer/component": "^1.0.0-beta.3",
@@ -45,10 +46,8 @@
     "ember-auto-import": "^1.5.2",
     "ember-cli": "~3.15.0-beta.1",
     "ember-cli-dependency-checker": "^3.1.0",
-    "ember-cli-eslint": "^5.1.0",
     "ember-cli-inject-live-reload": "^2.0.1",
     "ember-cli-sri": "^2.1.1",
-    "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-typescript-blueprints": "^3.0.0",
     "ember-cli-uglify": "^3.0.0",
     "ember-disable-prototype-extensions": "^1.1.3",
@@ -60,6 +59,7 @@
     "ember-source": "~3.15.0-beta.1",
     "ember-source-channel-url": "^2.0.1",
     "ember-try": "^1.2.1",
+    "eslint": "^6.7.1",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-ember": "^7.1.0",
     "eslint-plugin-node": "^10.0.0",
@@ -67,6 +67,7 @@
     "loader.js": "^4.7.0",
     "prettier": "^1.19.1",
     "qunit-dom": "^0.9.0",
+    "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   },
   "engines": {
