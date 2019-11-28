@@ -41,12 +41,12 @@ export function withContextualServices(...services) {
         super.willDestroy(...args);
       }
     };
-  }
+  };
 }
 
 export function context(ContextKey) {
   // https://github.com/emberjs/ember.js/blob/755ea5dbe65d91e0d650707da740aa6900d0a755/packages/%40ember/-internals/metal/lib/injected_property.ts#L72
-   let getInjection = function() {
+  let getInjection = function() {
     let owner = getOwner(this);
 
     assert(
@@ -59,21 +59,21 @@ export function context(ContextKey) {
     let router = owner.lookup('router:main');
     let localRegistry = registryFor(registry, router.currentRouteName);
 
-   assert(
-     `Attempt to look up contextual service failed. Ensure that your route is decorated with @withContextualServices(${ContextKey.name})`,
-     Boolean(localRegistry)
-   );
+    assert(
+      `Attempt to look up contextual service failed. Ensure that your route is decorated with @withContextualServices(${ContextKey.name})`,
+      Boolean(localRegistry)
+    );
 
     let context = localRegistry.get(ContextKey);
 
-     return context;
+    return context;
   };
 
-  return (target, propertyName, descriptor) => {
+  return (_target, _propertyName, _descriptor) => {
     return {
       configurable: false,
       enumerable: true,
       get: getInjection,
     };
-  }
+  };
 }

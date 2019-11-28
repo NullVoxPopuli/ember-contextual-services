@@ -12,4 +12,3 @@ export class LocalService extends ContextualService {
     this.foo++;
   }
 }
-

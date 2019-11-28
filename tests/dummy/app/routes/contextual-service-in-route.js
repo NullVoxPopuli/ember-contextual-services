@@ -4,6 +4,4 @@ import { withContextualServices } from 'ember-contextual-services';
 import { LocalService } from './-contexts/local-service';
 
 @withContextualServices(LocalService)
-export default class ContextualServiceInRouteRoute extends Route {
-
-}
+export default class ContextualServiceInRouteRoute extends Route {}

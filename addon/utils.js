@@ -4,5 +4,3 @@ export function registryFor(registry, routeName) {
 
   return registry.byRoute[routeName];
 }
-
-
