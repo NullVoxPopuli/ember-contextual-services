@@ -51,7 +51,7 @@ export function context(ContextKey: Class) {
       enumerable: true,
       get: function() {
         try {
-        return getContextInNearestRegistry.call(this, ContextKey);
+          return getContextInNearestRegistry.call(this, ContextKey);
         } catch (e) {
           console.error(e);
         }

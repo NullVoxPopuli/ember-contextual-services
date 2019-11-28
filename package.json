@@ -20,8 +20,8 @@
     "test": "ember test",
     "test:try-one": "ember try:one",
     "test:all": "ember try:each",
-    "prepublishOnly": "ember ts:precompile",
-    "postpublish": "ember ts:clean"
+    "_prepublishOnly": "ember ts:precompile",
+    "_postpublish": "ember ts:clean"
   },
   "dependencies": {
     "@glimmer/component": "^1.0.0-beta.3",
