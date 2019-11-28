@@ -20,7 +20,7 @@ jobs:
       run: yarn tsc --noEmit
 
   tests_floating:
-    name: Tests (Floating)
+    name: Floating
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -33,7 +33,7 @@ jobs:
       run: yarn test
 
   tests_lts_releases:
-    name: Tests (LTS & Releases)
+    name: LTS & Releases
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -55,7 +55,7 @@ jobs:
       run: yarn test:try-one ${{ matrix.scenario }}
 
   tests_integration:
-    name: Integration Tests
+    name: Integration
     runs-on: ubuntu-latest
     strategy:
       matrix:
