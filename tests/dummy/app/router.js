@@ -9,6 +9,9 @@ export default class Router extends AddonDocsRouter {
 Router.map(function() {
   docsRoute(this, function() {
     this.route('usage');
+    this.route('quickstart');
+    this.route('patterns');
+
     // this.route('contextual-service-in-route', function() {
     //   this.route('foo');
     //   this.route('baz');
