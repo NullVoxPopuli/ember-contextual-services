@@ -5,6 +5,7 @@ import { hbs } from 'ember-cli-htmlbars';
 
 import Service, { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
+import EmberComponent from '@ember/component';
 
 import { ContextProvider, context } from 'ember-contextual-services';
 
@@ -94,6 +95,31 @@ module('Integration | Component | provider', function(hooks) {
       `);
 
       assert.dom(this.element).hasText('provided some stuff');
+    });
+
+    test('provides context two levels down', async function(assert) {
+      class FooProvider extends ContextProvider {
+        provided = 'provided some stuff';
+      }
+      class Consumer extends Component {
+        @context(FooProvider) foo!: FooProvider;
+      }
+      class Intermediate extends Component {};
+      this.owner.register('component:foo-provider', FooProvider);
+      this.owner.register('component:consumer', Consumer);
+      this.owner.register('component:intermediate', Intermediate);
+      this.owner.register('template:components/consumer', hbs`{{this.foo.provided}}`);
+
+      await render(hbs`
+        <FooProvider>
+          <Intermediate>
+            <Consumer />
+          </Intermediate>
+        </FooProvider>
+      `);
+
+      assert.dom(this.element).hasText('provided some stuff');
+
     });
   });
 });

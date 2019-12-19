@@ -32,13 +32,11 @@ export default class ComponentManager<Component extends BaseComponent> {
   });
 
   static create(attrs: {}) {
-    debugger;
     let owner = getOwner(attrs);
     return new ComponentManager(owner);
   }
 
   create() {
-    debugger;
   }
 
   constructor(owner: unknown) {
@@ -47,7 +45,6 @@ export default class ComponentManager<Component extends BaseComponent> {
 
   createComponent(Klass: Constructor<Component>, args: ComponentManagerArgs) {
     let instance = new Klass(getOwner(this), args.named);
-    debugger;
 
     instance[PREVIOUS_ARGS] = { ...args.named };
     return instance;
