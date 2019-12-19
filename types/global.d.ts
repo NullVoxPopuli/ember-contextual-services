@@ -6,3 +6,7 @@ declare module 'ember-contextual-services--alpha/templates/*' {
 }
 
 type Class = { new (...args: any[]): any };
+
+interface Constructor<T> {
+  new (owner: unknown, args: {}): T;
+}
