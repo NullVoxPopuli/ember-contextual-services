@@ -2,7 +2,7 @@
 
 ## Installation
 
-- `git clone <repository-url>`
+- `git clone git@github.com:NullVoxPopuli/ember-contextual-services.git`
 - `cd ember-contextual-services`
 - `yarn install`
 

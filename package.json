@@ -1,9 +1,11 @@
 {
-  "name": "ember-contextual-services",
+  "name": "@nullvoxpopuli/ember-contextual-services",
   "version": "0.0.5",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Eliminate Prop-Drilling by Providing Ephemeral Services based on the route!",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "contextual-services",
+    "context"
   ],
   "repository": "https://github.com/NullVoxPopuli/ember-contextual-services",
   "license": "MIT",

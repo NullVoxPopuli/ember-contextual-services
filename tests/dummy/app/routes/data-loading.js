@@ -1,5 +1,8 @@
 import Route from '@ember/routing/route';
-import { withContextualServices, context } from 'ember-contextual-services';
+import {
+  withContextualServices,
+  context,
+} from '@nullvoxpopuli/ember-contextual-services';
 
 import { PersonService } from './-contexts/person-service';
 

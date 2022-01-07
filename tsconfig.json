@@ -28,16 +28,16 @@
         "tests/dummy/app/*",
         "app/*"
       ],
-      "ember-contextual-services": [
+      "@nullvoxpopuli/ember-contextual-services": [
         "addon"
       ],
-      "ember-contextual-services/*": [
+      "@nullvoxpopuli/ember-contextual-services/*": [
         "addon/*"
       ],
-      "ember-contextual-services/test-support": [
+      "@nullvoxpopuli/ember-contextual-services/test-support": [
         "addon-test-support"
       ],
-      "ember-contextual-services/test-support/*": [
+      "@nullvoxpopuli/ember-contextual-services/test-support/*": [
         "addon-test-support/*"
       ],
       "*": [

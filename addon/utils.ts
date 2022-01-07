@@ -2,7 +2,7 @@ import { assert } from '@ember/debug';
 import { getOwner } from '@ember/application';
 
 import PrivateRegistry from 'dummy/services/ember-contextual-services/-private/registry';
-import { REGISTRY_NAME } from 'ember-contextual-services/constants';
+import { REGISTRY_NAME } from '@nullvoxpopuli/ember-contextual-services/constants';
 
 export function registryFor(registry: PrivateRegistry, routeName: string) {
   registry.byRoute = registry.byRoute || {};

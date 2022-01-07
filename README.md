@@ -1,6 +1,6 @@
 # ember-contextual-services
 
-[![npm version](https://badge.fury.io/js/ember-contextual-services.svg)](https://badge.fury.io/js/ember-contextual-services)
+[![npm version](https://badge.fury.io/js/@nullvoxpopuli/ember-contextual-services.svg)](https://badge.fury.io/js/@nullvoxpopuli/ember-contextual-services)
 [![CI](https://github.com/NullVoxPopuli/ember-contextual-services/actions/workflows/tests.yml/badge.svg?branch=master&event=push)](https://github.com/NullVoxPopuli/ember-contextual-services/actions/workflows/tests.yml)
 
 Eliminate Prop-Drilling by Providing Ephemeral Services based on the route!
@@ -29,7 +29,7 @@ A: No, but co-location is highly encouraged. One of the main benefits to using c
 ## Installation
 
 ```
-ember install ember-contextual-services--alpha
+ember install @nullvoxpopuli/ember-contextual-services
 ```
 
 ## Usage
@@ -41,7 +41,7 @@ NOTE: all of these examples are available for viewing in the `tests/dummy` folde
 in routes/wherever/-contexts/local-service.js;
 
 ```ts
-import { ContextualService } from 'ember-contextual-services';
+import { ContextualService } from '@nullvoxpopuli/ember-contextual-services';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -61,7 +61,7 @@ in routes/wherever/some-route.js
 
 ```ts
 import Route from '@ember/routing/route';
-import { withContextualServices } from 'ember-contextual-services';
+import { withContextualServices } from '@nullvoxpopuli/ember-contextual-services';
 
 import { LocalService } from './-contexts/local-service';
 
@@ -92,7 +92,7 @@ and finally, in a component that is rendered by your route's template or a tree 
 ```ts
 import Component from '@glimmer/component';
 
-import { context } from 'ember-contextual-services';
+import { context } from '@nullvoxpopuli/ember-contextual-services';
 
 import { LocalService } from 'my-app/routes/whatever/-contexts/local-service';
 
