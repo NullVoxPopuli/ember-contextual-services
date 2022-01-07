@@ -45,11 +45,15 @@ export function withContextualServices(...services: Class[]) {
 }
 
 export function context(ContextKey: Class) {
-  return (_target: unknown, _propertyName: string, _descriptor: PropertyDescriptor) => {
+  return (
+    _target: unknown,
+    _propertyName: string,
+    _descriptor: PropertyDescriptor
+  ) => {
     return {
       configurable: false,
       enumerable: true,
-      get: function() {
+      get: function () {
         try {
           return getContextInNearestRegistry.call(this, ContextKey);
         } catch (e) {

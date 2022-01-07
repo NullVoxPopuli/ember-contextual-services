@@ -19,7 +19,7 @@ export function getContextInNearestRegistry(this: unknown, ContextKey: Class) {
   );
 
   let registry = owner.lookup(REGISTRY_NAME);
-  let router = owner.lookup('router:main');
+  let router = owner.lookup('service:router');
 
   let routeParts = router.currentRouteName.split('.');
   let context: Class | undefined;
