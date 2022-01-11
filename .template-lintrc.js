@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
-  extends: 'octane',
-  quotes: 'single',
+  extends: 'recommended',
+
+  ignore: ['tests/-ember-apps/**'],
 };

@@ -2,7 +2,7 @@ import { assert } from '@ember/debug';
 import { getOwner } from '@ember/application';
 
 import PrivateRegistry from 'dummy/services/ember-contextual-services/-private/registry';
-import { REGISTRY_NAME } from 'ember-contextual-services/constants';
+import { REGISTRY_NAME } from '@nullvoxpopuli/ember-contextual-services/constants';
 
 export function registryFor(registry: PrivateRegistry, routeName: string) {
   registry.byRoute = registry.byRoute || {};
@@ -19,7 +19,7 @@ export function getContextInNearestRegistry(this: unknown, ContextKey: Class) {
   );
 
   let registry = owner.lookup(REGISTRY_NAME);
-  let router = owner.lookup('router:main');
+  let router = owner.lookup('service:router');
 
   let routeParts = router.currentRouteName.split('.');
   let context: Class | undefined;

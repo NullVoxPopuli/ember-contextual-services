@@ -1,1 +1,1 @@
-export { default } from 'ember-contextual-services/services/ember-contextual-services/-private/registry';
+export { default } from '@nullvoxpopuli/ember-contextual-services/services/ember-contextual-services/-private/registry';

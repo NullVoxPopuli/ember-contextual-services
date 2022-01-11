@@ -1,4 +1,4 @@
-import { ContextualService } from 'ember-contextual-services';
+import { ContextualService } from '@nullvoxpopuli/ember-contextual-services';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 

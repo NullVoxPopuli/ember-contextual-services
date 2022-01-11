@@ -3,17 +3,21 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  NODE_VERSION: '16'
+
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12.x'
+        node-version: ${{ env.NODE_VERSION }}
     - name: Install
-      run: yarn install
+      run: yarn install --frozen-lockfile
     - name: ESLint
       run: yarn lint:js
     - name: Types
@@ -22,41 +26,43 @@ jobs:
   tests_floating:
     name: Floating
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12.x'
+        node-version: ${{ env.NODE_VERSION }}
     - name: Install
       run: yarn install --no-lockfile --non-interactive
     - name: Test
-      run: yarn test
+      run: yarn test:ember
 
   tests_lts_releases:
     name: LTS & Releases
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       matrix:
         scenario:
-        - "ember-lts-3.4"
-        - "ember-lts-3.8"
-        - "ember-lts-3.12"
-        - "ember-release"
-        - "ember-beta"
-        - "ember-canary"
+        - ember-lts-3.24
+        - ember-lts-3.28
+        - ember-release
+        - ember-beta
+        - ember-canary
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12.x'
+        node-version: ${{ env.NODE_VERSION }}
     - name: Install
-      run: yarn install
+      run: yarn install --frozen-lockfile
     - name: Test with ${{ matrix.scenario }}
-      run: yarn test:try-one ${{ matrix.scenario }}
+      run: ./node_modules/.bin/ember try:one ${{ matrix.scenario }}
 
   tests_integration:
     name: Integration
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       matrix:
         ember_app:
@@ -64,14 +70,14 @@ jobs:
         - "classic/3.14"
         - "octane/3.14"
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12.x'
+        node-version: ${{ env.NODE_VERSION }}
     - name: Test
       env:
         EMBER_APP: ${{ matrix.ember_app }}
       run: |
         cd tests/-ember-apps/$EMBER_APP/
         yarn
-        yarn test
+        ./node_modules/.bin/ember test

@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { context } from 'ember-contextual-services';
+import { context } from '@nullvoxpopuli/ember-contextual-services';
 
 import { PersonService } from 'dummy/routes/-contexts/person-service';
 
