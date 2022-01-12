@@ -26,7 +26,7 @@ export function withContextualServices(...services: Class[]) {
           this[REGISTRY].set(providedService, instance);
         }
 
-        super.model(...args);
+        return super.model(...args);
       }
 
       deactivate() {
