@@ -26,8 +26,8 @@
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test",
     "test:ember-compatibility": "ember try:each",
-    "_prepublishOnly": "ember ts:precompile",
-    "_postpublish": "ember ts:clean"
+    "prepack": "ember ts:precompile",
+    "postpack": "ember ts:clean"
   },
   "dependencies": {
     "ember-cli-babel": "^7.26.10",
