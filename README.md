@@ -78,11 +78,19 @@ or if you want to utilize the route's model hook for data-loading, you could do:
 export default class SomeRoute extends Route {
   @context(PersonService) personService;
 
-  async model() {
-    let response = await fetch('https://swapi.co/api/people/1/');
-    let json = await response.json();
+  constructor() {
+    super(...arguments);
 
-    this.personService.data = json;
+    this.router.on('routeDidChange', (transition) => {
+      if (transition.to.name === this.routeName) {
+        this.personService.data = this.currentModel;
+      }
+    });
+  }
+
+  async model() {
+    let response = await fetch('https://swapi.dev/api/people/1/');
+    return response.json();
   }
 }
 ```
