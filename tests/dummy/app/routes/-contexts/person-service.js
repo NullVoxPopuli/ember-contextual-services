@@ -10,7 +10,7 @@ export class PersonService extends ContextualService {
   @action
   async nextPerson() {
     this.lastId++;
-    let response = await fetch(`https://swapi.co/api/people/${this.lastId}`);
+    let response = await fetch(`https://swapi.dev/api/people/${this.lastId}`);
     let json = await response.json();
 
     this.data = json;
