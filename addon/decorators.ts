@@ -2,6 +2,7 @@ import { getOwner } from '@ember/application';
 
 import { registryFor, getContextInNearestRegistry } from './utils';
 import { REGISTRY_NAME } from './constants';
+import {ContextProvider} from 'ember-contextual-services';
 
 const REGISTRY = Symbol('ContextualRegistry');
 
@@ -44,6 +45,21 @@ export function withContextualServices(...services: Class[]) {
   };
 }
 
+function getProvider(ContextKey: Class) {
+  console.log(ContextKey);
+
+  if (!this.parentView) {
+    debugger;
+    throw new Error('We have no way to get data from up the tree');
+  }
+
+  if (this.parentView && this.parentView instanceof ContextKey) {
+    return this.parentView;
+  }
+
+  debugger;
+}
+
 export function context(ContextKey: Class) {
   return (
     _target: unknown,
@@ -55,6 +71,10 @@ export function context(ContextKey: Class) {
       enumerable: true,
       get: function () {
         try {
+          if (ContextKey.prototype instanceof ContextProvider) {
+            return getProvider.call(this, ContextKey);
+          }
+
           return getContextInNearestRegistry.call(this, ContextKey);
         } catch (e) {
           console.error(e);

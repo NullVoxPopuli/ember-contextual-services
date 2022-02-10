@@ -6,3 +6,7 @@ declare module '@nullvoxpopuli/ember-contextual-services/templates/*' {
 }
 
 type Class = { new (...args: any[]): any };
+
+interface Constructor<T> {
+  new (owner: unknown, args: {}): T;
+}
